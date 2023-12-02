@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,17 @@ namespace Business.Concrete
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), "Arabalar Listelendi");
+        }
+
+
+        public IDataResult<List<CarDetailsDto>> GetCarDetails()
+        {
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails());
+        }
+
+        public IDataResult<List<CarDetailsDto>> GetCarDetailsByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetailsByBrandId(brandId));
         }
     }
 }

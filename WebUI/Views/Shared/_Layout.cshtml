@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental</title>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/car-icaon" href="img/favicon.png">
+</head>
+<body>
+
+    <!--navbar-->
+    <header>
+        <a href="#" class="logo">
+            Car Rental
+            <img src="img/car_rental.png" alt="">
+        </a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+        <ul class=navbar>
+            <li><a href="Home">Home</a></li>
+            <li><a href="Home#car_models">Car Models</a></li>
+            <li><a href="CarBuy">Cars Buy</a></li>
+            <li><a href="CarSell">Cars Sell</a></li>
+            <li><a href="Home#about">About</a></li>
+
+        </ul>
+        <div class="header-btn">
+            <a href="#" class="sign-up">Sign Up</a>
+            <a href="#" class="sign-in">Sign In</a>
+        </div>
+    </header>
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <!--footer-->
+    <footer class="copyright">
+        <div class="up" id="up">
+            <p>&copy car rental</p>
+        </div>
+    </footer>
+
+
+</body>
+
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</html>
+
+
+

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace Entities.Concrete
 {
-    public partial class Car : IEntity
+
+    public partial class Car :IEntity
     {
         public int Id { get; set; }
 
@@ -17,8 +18,6 @@ namespace Entities.Concrete
         public decimal Price { get; set; }
 
         public string Description { get; set; } = null!;
-
-        public byte[]? Image { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
@@ -35,6 +34,8 @@ namespace Entities.Concrete
         public virtual Brand Brand { get; set; } = null!;
 
         public virtual Color Color { get; set; } = null!;
+
+        public virtual ICollection<Image> Images { get; set; } = new List<Image>();
 
         public virtual ICollection<Notice> Notices { get; set; } = new List<Notice>();
     }

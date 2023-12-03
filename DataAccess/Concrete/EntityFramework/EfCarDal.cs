@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,
-                                 Image = p.Image,
+                                 
                              };
                  return result.ToList();
                              
@@ -54,7 +54,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,
-                                 Image = p.Image,
+                                 
                              };
                 return result.ToList();
 

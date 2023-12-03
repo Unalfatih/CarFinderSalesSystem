@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace DataAccess.Concrete.EntityFramework
 {
 
+
     public partial class CarFinderSalesSystemContext : DbContext
     {
         public CarFinderSalesSystemContext()
@@ -23,12 +24,15 @@ namespace DataAccess.Concrete.EntityFramework
 
         public virtual DbSet<Color> Colors { get; set; }
 
+        public virtual DbSet<Image> Images { get; set; }
+
         public virtual DbSet<Notice> Notices { get; set; }
 
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer(" Server=UNAL;Database=CarFinder/SalesSystem;Trusted_Connection=True;TrustServerCertificate=True; ");
+    #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+            => optionsBuilder.UseSqlServer("Server=UNAL;Database=CarFinder/SalesSystem;Trusted_Connection=True;TrustServerCertificate=true;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,7 +51,6 @@ namespace DataAccess.Concrete.EntityFramework
                 entity.Property(e => e.Description)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-                entity.Property(e => e.Image).HasColumnType("image");
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 6)");
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
@@ -69,6 +72,19 @@ namespace DataAccess.Concrete.EntityFramework
                     .HasMaxLength(50)
                     .IsUnicode(false);
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Image>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Image1)
+                    .HasColumnType("image")
+                    .HasColumnName("Image");
+
+                entity.HasOne(d => d.Car).WithMany(p => p.Images)
+                    .HasForeignKey(d => d.CarId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Images_Cars");
             });
 
             modelBuilder.Entity<Notice>(entity =>

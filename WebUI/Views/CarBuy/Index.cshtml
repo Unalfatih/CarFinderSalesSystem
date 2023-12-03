@@ -3,11 +3,17 @@
 }
 <!DOCTYPE html>
 <html lang="en">
-
-
+<head>
+    <link rel="stylesheet" href="css/car_buy.css">
+    <link rel="icon" type="image/car-icaon" href="img/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
 
 
 <body>
+
+    <!--navbar-->
+    
 
     <!--home-->
     <section class="home" id="home" style="display: flex; flex-direction: row; grid-gap: 1rem">
@@ -33,11 +39,41 @@
             <label for="case_type">Case Type</label>
             <select id="case_type"></select>
 
-            <label for="price">Price</label>
-            <input id="price" type="range">
+            <label for="slider-1">Price</label>
+            <div class="wrapper">
+                <div class="values">
+                    <span id="range1">
+                        0
+                    </span>
+                    <span> &dash; </span>
+                    <span id="range2">
+                        100
+                    </span>
+                </div>
+                <div class="container">
+                    <div class="slider-track"></div>
+                    <input type="range" min="0" max="100" value="30" id="slider-1" oninput="slideOne()">
+                    <input type="range" min="0" max="100" value="70" id="slider-2" oninput="slideTwo()">
+                </div>
+            </div>
 
-            <label for="km">Km</label>
-            <input id="km" type="range">
+            <label for="slider-3">Km</label>
+            <div class="wrapper">
+                <div class="values">
+                    <span id="range3">
+                        0
+                    </span>
+                    <span> &dash; </span>
+                    <span id="range4">
+                        100
+                    </span>
+                </div>
+                <div class="container">
+                    <div class="slider-track"></div>
+                    <input type="range" min="0" max="100" value="30" id="slider-3" oninput="slideThree()">
+                    <input type="range" min="0" max="100" value="70" id="slider-4" oninput="slideFour()">
+                </div>
+            </div>
 
             <div class="submit">
                 <button class="submit_button" id="btnSearch" type="button">Find Cars</button>
@@ -46,43 +82,144 @@
 
         </div>
         <div style="width: 75%">
-            <div style="display: flex; flex-direction: row; flex-wrap: wrap">
-                <div style="width: 25%">
-                    <img src="icon.png" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="list" id="list" style="display: flex; flex-direction: row; grid-gap: 1rem;">
-        <div style="width: 75%">
-           <div style="display: flex; flex-direction: row; flex-wrap: wrap">
-               <div style="width: 25%">
-                    <h1>Product List</h1>
-                    <table class="table table-striped table-bordered">
+            <div style=" overflow-x: auto;">
+                
+                   <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Category Name</th>
+                                <th>Brand Name</th>
+                                <th>Color Name</th>
                                 <th>Price</th>
-                                <th>Stock Quantity</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Model Year</th>
+                                <th>Image</th>
+                                <th>Detail</th>
+                                
                             </tr>
                         </thead>
                         <tbody id="list_data">
                         </tbody>
-                    </table>
-                    </div>
+                   </table>
+
+                
             </div>
         </div>
     </section>
 
+    <!--footer-->
+    <footer class="copyright">
+        <div class="up" id="up">
+            <p>&copy car rental</p>
+        </div>
+    </footer>
 
     <script src="js/main.js"></script>
 
     <script>
+        $(document).ready(function () {
+
+            loadCarList();
+
+        });
+
+
+
+
         const filter_brand_select = document.getElementById('filter_brand')
         filter_brand_select.innerHTML = ['marka1', 'marka2', 'marka3'].map(item => '<option>' + item + '</option>')
+
+        //price ve km'nin barları için;
+        window.onload = function () {
+            slideOne();
+            slideTwo();
+            slideThree();
+            slideFour();
+        }
+
+        let sliderOne = document.getElementById("slider-1");
+        let sliderTwo = document.getElementById("slider-2");
+        let sliderThree = document.getElementById("slider-3");
+        let sliderFour = document.getElementById("slider-4");
+        let displayValOne = document.getElementById("range1");
+        let displayValTwo = document.getElementById("range2");
+        let displayValThree = document.getElementById("range3");
+        let displayValFour = document.getElementById("range4");
+        let minGap = 0;
+        let sliderTrack = document.querySelector(".slider-track");
+        let sliderMaxValue1 = document.getElementById("slider-1").max;
+        let sliderMaxValue2 = document.getElementById("slider-3").max;
+
+        function slideOne() {
+            if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+                sliderOne.value = parseInt(sliderTwo.value) - minGap;
+            }
+            displayValOne.textContent = sliderOne.value;
+            fillColor();
+        }
+        function slideTwo() {
+            if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
+                sliderTwo.value = parseInt(sliderOne.value) + minGap;
+            }
+            displayValTwo.textContent = sliderTwo.value;
+            fillColor();
+        }
+        function slideThree() {
+            if (parseInt(sliderFour.value) - parseInt(sliderThree.value) <= minGap) {
+                sliderThree.value = parseInt(sliderFour.value) + minGap;
+            }
+            displayValThree.textContent = sliderThree.value;
+            fillColor();
+        }
+        function slideFour() {
+            if (parseInt(sliderFour.value) - parseInt(sliderThree.value) <= minGap) {
+                sliderFour.value = parseInt(sliderThree.value) + minGap;
+            }
+            displayValFour.textContent = sliderFour.value;
+            fillColor();
+        }
+        function fillColor() {
+            percent1 = (sliderOne.value / sliderMaxValue1) * 100;
+            percent2 = (sliderTwo.value / sliderMaxValue1) * 100;
+            percent3 = (sliderThree.value / sliderMaxValue2) * 100;
+            percent4 = (sliderFour.value / sliderMaxValue2) * 100;
+            sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #3264fe ${percent1}% , #3264fe ${percent2}%, #dadae5 ${percent2}%,
+                                                                      #dadae5 ${percent3}% , #3264fe ${percent3}% , #dadae5 ${percent4}% , #3264fe ${percent4}% )`;
+        }
+
+
+
+
+        function loadCarList(){
+            var tbody = $("#list_data");
+            tbody.empty();
+
+            $.ajax({
+                url: "@Url.Action("GetCarDetails","CarBuy")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {
+                    $.each(response, function(index, item) {
+                        var row = `
+                                <tr>
+                                    <td>${item.brandName}</td>
+                                    <td>${item.colorName}</td>
+                                    <td>${item.price}</td>
+                                    <td>${item.modelYear}</td>
+                                    <td>${item.image}</td> 
+                                    <td>
+                                        <button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button> 
+                                    </td>
+                                </tr>`;
+                        tbody.append(row);
+                    });
+                },
+                error: function (error) {
+                    console.error("Error loading car list:", error);
+                }
+            });
+        }
+
+
+
     </script>
 
 

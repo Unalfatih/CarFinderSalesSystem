@@ -106,6 +106,15 @@ header .logo {
     background: var(--back-color);
 }
 
+.title:before {
+    display: table;
+    content: "";
+}
+
+.title:after {
+    clear: both;
+}
+
 .header-btn a {
     padding: 10px 20px;
     color: var(--text-color);
@@ -198,6 +207,56 @@ label {
     margin-top: 10px;
 }
 
+.ff_v8 {
+    background-color: #FFFFFF;
+    padding: 17px 12px 10px 20px;
+    margin-bottom: 10px;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid #504e4e;
+    box-shadow: 1px 1px 2px #736e6e;
+}
+
+    .ff_v8 #pfb1, #pfb2 {
+        color: #ee2121;
+        font-size: .9em;
+        line-height: normal;
+        margin-bottom: 8px;
+    }
+
+    .ff_v8 .pf_iw {
+        display: flex;
+        position: relative;
+        margin-bottom: 18px;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        color: #D2D7DD;
+    }
+
+        .ff_v8 .pf_iw > input {
+            border: 2px solid #D2D7DD;
+            width: 38%;
+            border-radius: 6px;
+            height: 36px;
+            padding: 0 8px;
+            box-sizing: border-box;
+            background: #FBFBFB;
+        }
+
+        .ff_v8 .pf_iw button {
+            display: inline-block;
+            width: 15%;
+            height: 36px;
+            background-color: #D2D7DD;
+            border: 0;
+            cursor: pointer;
+            float: right;
+            border-radius: 6px;
+            margin-left: 5px;
+        }
+
 input[type="range"] {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -265,7 +324,6 @@ input[type="range"]:active::-webkit-slider-thumb {
     }
 
 
-
 * {
     box-sizing: border-box;
 }
@@ -331,7 +389,6 @@ input[type="range"]:active::-webkit-slider-thumb {
     }
 }
 
-
 .copyright {
     width: 100%;
     text-align: center;
@@ -340,12 +397,12 @@ input[type="range"]:active::-webkit-slider-thumb {
 }
 
 /* Temel tablo stilini belirleme */
-.table {
+.table_name {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
     margin-top: 20px;
-    position: sticky; /* Tabloyu sabitleme */
+    position: relative; /* Tabloyu sabitleme */
     top: 0; /* Sayfanýn üstüne sabitleme */
     z-index: 1; /* Gerekirse diðer öðelerin üzerine çýkarma */
 }

@@ -19,6 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from p in context.Cars
                              join b in context.Brands on p.BrandId equals b.Id
                              join c in context.Colors on p.ColorId equals c.Id
+                             join i in context.Images on p.Id equals i.CarId
                              select new CarDetailsDto
                              {
                                  Id = p.Id,
@@ -29,6 +30,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,
+                                 CarImage = i.Image1,
                                  
                              };
                  return result.ToList();
@@ -40,9 +42,10 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (CarFinderSalesSystemContext context = new CarFinderSalesSystemContext())
             {
-                var result = from p in context.Cars
-                             join b in context.Brands on p.BrandId equals b.Id
+                var result = from p in context.Cars                            
                              join c in context.Colors on p.ColorId equals c.Id
+                             join i in context.Images on p.Id equals i.CarId
+                             join b in context.Brands on p.BrandId equals b.Id
                              where b.Id == brandId
                              select new CarDetailsDto
                              {
@@ -54,13 +57,39 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,
-                                 
+                                 CarImage = i.Image1,
+
                              };
                 return result.ToList();
 
             }
         }
 
+        public List<CarDetailsDto> GetCarDetailsByPriceRange(decimal minPrice, decimal maxPrice)
+        {
+            using (CarFinderSalesSystemContext context = new CarFinderSalesSystemContext())
+            {
+                var result = from p in context.Cars
+                             join b in context.Brands on p.BrandId equals b.Id
+                             join c in context.Colors on p.ColorId equals c.Id
+                             join i in context.Images on p.Id equals i.CarId
+                             where p.Price >= minPrice && p.Price <= maxPrice
+                             select new CarDetailsDto
+                             {
+                                 Id = p.Id,
+                                 ColorId = c.Id,
+                                 BrandId = b.Id,
+                                 BrandName = b.Name,
+                                 ColorName = c.Name,
+                                 ModelYear = p.ModelYear,
+                                 Price = p.Price,
+                                 Description = p.Description,
+                                 CarImage = i.Image1
+                             };
+
+                return result.ToList();
+            }
+        }
 
     }
 }

@@ -13,5 +13,6 @@ namespace DataAccess.Abstract
     {
         List<CarDetailsDto> GetCarDetails();
         List<CarDetailsDto> GetCarDetailsByBrandId(int brandId);
+        List<CarDetailsDto> GetCarDetailsByPriceRange(decimal minPrice, decimal maxPrice);
     }
 }

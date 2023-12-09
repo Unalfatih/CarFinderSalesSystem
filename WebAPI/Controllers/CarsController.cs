@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +42,28 @@ namespace WebAPI.Controllers
         public IActionResult GetCarDetailsByBrandId(int ıd)
         {
             var result = _carService.GetCarDetailsByBrandId(ıd);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcardetailsbyprice")]
+        public IActionResult GetCarDetailsByPriceRange(decimal min , decimal max)
+        {
+            var result = _carService.GetCarDetailsByPriceRange(min, max);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult AddCar(Car car)
+        {
+            var result = _carService.Add(car);
             if (result.Success)
             {
                 return Ok(result);

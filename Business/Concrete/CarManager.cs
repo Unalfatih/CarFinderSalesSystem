@@ -25,6 +25,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), "Arabalar Listelendi");
         }
 
+        public IDataResult<List<CarDetailsDto>> GetCarDetailsByPriceRange(decimal min, decimal max)
+        {
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetailsByPriceRange(min,max));
+        }
 
         public IDataResult<List<CarDetailsDto>> GetCarDetails()
         {
@@ -34,6 +38,13 @@ namespace Business.Concrete
         public IDataResult<List<CarDetailsDto>> GetCarDetailsByBrandId(int brandId)
         {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetailsByBrandId(brandId));
+        }
+
+        public IResult Add(Car car)
+        {
+            _carDal.Add(car);
+
+            return new SuccessResult("Car Added");
         }
     }
 }

@@ -11,10 +11,6 @@
 
 
 <body>
-
-    <!--navbar-->
-    
-
     <!--home-->
     <section class="home" id="home" style="display: flex; flex-direction: row; grid-gap: 1rem">
         <div style="width: 25%; display: flex; flex-direction: column; grid-gap: 0.5rem">
@@ -39,41 +35,37 @@
             <label for="case_type">Case Type</label>
             <select id="case_type"></select>
 
-            <label for="slider-1">Price</label>
-            <div class="wrapper">
-                <div class="values">
-                    <span id="range1">
-                        0
+            <label>Price</label>
+            <form class="ff_v8">
+                <span class="fpl_v8">
+                    <input type="hidden" id="pfbu1" value="">
+                    <div id="pfb1">Please enter price range</div>
+                    <span class="pf_iw">
+                        <input id="pf1" placeholder="minimum" type="text" maxlength="10" value>
+                        <text>-</text>
+                        <input id="pf2" placeholder="maximum" type="text" maxlength="10" value>
+                        <button>
+                            >
+                        </button>
                     </span>
-                    <span> &dash; </span>
-                    <span id="range2">
-                        100
-                    </span>
-                </div>
-                <div class="container">
-                    <div class="slider-track"></div>
-                    <input type="range" min="0" max="100" value="30" id="slider-1" oninput="slideOne()">
-                    <input type="range" min="0" max="100" value="70" id="slider-2" oninput="slideTwo()">
-                </div>
-            </div>
+                </span>
+            </form>
 
-            <label for="slider-3">Km</label>
-            <div class="wrapper">
-                <div class="values">
-                    <span id="range3">
-                        0
+            <label>Km</label>
+            <form class="ff_v8">
+                <span class="fpl_v8">
+                    <input type="hidden" id="pfbu2" value="">
+                    <div id="pfb2">Please enter price range</div>
+                    <span class="pf_iw">
+                        <input id="pf3" placeholder="minimum" type="text" maxlength="10" value>
+                        <text>-</text>
+                        <input id="pf4" placeholder="maximum" type="text" maxlength="10" value>
+                        <button>
+                            >
+                        </button>
                     </span>
-                    <span> &dash; </span>
-                    <span id="range4">
-                        100
-                    </span>
-                </div>
-                <div class="container">
-                    <div class="slider-track"></div>
-                    <input type="range" min="0" max="100" value="30" id="slider-3" oninput="slideThree()">
-                    <input type="range" min="0" max="100" value="70" id="slider-4" oninput="slideFour()">
-                </div>
-            </div>
+                </span>
+            </form>
 
             <div class="submit">
                 <button class="submit_button" id="btnSearch" type="button">Find Cars</button>
@@ -83,24 +75,23 @@
         </div>
         <div style="width: 75%">
             <div style=" overflow-x: auto;">
-                
-                   <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Brand Name</th>
-                                <th>Color Name</th>
-                                <th>Price</th>
-                                <th>Model Year</th>
-                                <th>Image</th>
-                                <th>Detail</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody id="list_data">
-                        </tbody>
-                   </table>
 
-                
+                <table class="table_name table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Brand Name</th>
+                            <th>Color Name</th>
+                            <th>Price</th>
+                            <th>Model Year</th>
+                            <th>Image</th>
+                            <th>Detail</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="list_data">
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </section>
@@ -122,73 +113,11 @@
         });
 
 
-
-
         const filter_brand_select = document.getElementById('filter_brand')
         filter_brand_select.innerHTML = ['marka1', 'marka2', 'marka3'].map(item => '<option>' + item + '</option>')
 
-        //price ve km'nin barları için;
-        window.onload = function () {
-            slideOne();
-            slideTwo();
-            slideThree();
-            slideFour();
-        }
 
-        let sliderOne = document.getElementById("slider-1");
-        let sliderTwo = document.getElementById("slider-2");
-        let sliderThree = document.getElementById("slider-3");
-        let sliderFour = document.getElementById("slider-4");
-        let displayValOne = document.getElementById("range1");
-        let displayValTwo = document.getElementById("range2");
-        let displayValThree = document.getElementById("range3");
-        let displayValFour = document.getElementById("range4");
-        let minGap = 0;
-        let sliderTrack = document.querySelector(".slider-track");
-        let sliderMaxValue1 = document.getElementById("slider-1").max;
-        let sliderMaxValue2 = document.getElementById("slider-3").max;
-
-        function slideOne() {
-            if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-                sliderOne.value = parseInt(sliderTwo.value) - minGap;
-            }
-            displayValOne.textContent = sliderOne.value;
-            fillColor();
-        }
-        function slideTwo() {
-            if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-                sliderTwo.value = parseInt(sliderOne.value) + minGap;
-            }
-            displayValTwo.textContent = sliderTwo.value;
-            fillColor();
-        }
-        function slideThree() {
-            if (parseInt(sliderFour.value) - parseInt(sliderThree.value) <= minGap) {
-                sliderThree.value = parseInt(sliderFour.value) + minGap;
-            }
-            displayValThree.textContent = sliderThree.value;
-            fillColor();
-        }
-        function slideFour() {
-            if (parseInt(sliderFour.value) - parseInt(sliderThree.value) <= minGap) {
-                sliderFour.value = parseInt(sliderThree.value) + minGap;
-            }
-            displayValFour.textContent = sliderFour.value;
-            fillColor();
-        }
-        function fillColor() {
-            percent1 = (sliderOne.value / sliderMaxValue1) * 100;
-            percent2 = (sliderTwo.value / sliderMaxValue1) * 100;
-            percent3 = (sliderThree.value / sliderMaxValue2) * 100;
-            percent4 = (sliderFour.value / sliderMaxValue2) * 100;
-            sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #3264fe ${percent1}% , #3264fe ${percent2}%, #dadae5 ${percent2}%,
-                                                                      #dadae5 ${percent3}% , #3264fe ${percent3}% , #dadae5 ${percent4}% , #3264fe ${percent4}% )`;
-        }
-
-
-
-
-        function loadCarList(){
+        function loadCarList() {
             var tbody = $("#list_data");
             tbody.empty();
 
@@ -197,18 +126,26 @@
                 method: "POST",
                 dataType: "json",
                 success: function (response) {
-                    $.each(response, function(index, item) {
+                    $.each(response, function (index, item) {
+
+                        //var hexData = item.carImage;
+
+                        //var base64Data = hexToBase64(hexData);
+
+                        //var imageUrl = 'data:image/jpeg;base64,' + base64Data;
+
+
                         var row = `
-                                <tr>
-                                    <td>${item.brandName}</td>
-                                    <td>${item.colorName}</td>
-                                    <td>${item.price}</td>
-                                    <td>${item.modelYear}</td>
-                                    <td>${item.image}</td> 
-                                    <td>
-                                        <button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button> 
-                                    </td>
-                                </tr>`;
+                                        <tr>
+                                            <td>${item.brandName}</td>
+                                            <td>${item.colorName}</td>
+                                            <td>${item.price}</td>
+                                            <td>${item.modelYear}</td>
+                                            <td>${item.carImage}</td>
+                                            <td>
+                                                <button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button>
+                                            </td>
+                                        </tr>`;
                         tbody.append(row);
                     });
                 },
@@ -218,10 +155,7 @@
             });
         }
 
-
-
     </script>
-
 
 </body>
 </html>

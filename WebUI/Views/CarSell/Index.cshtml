@@ -1,44 +1,277 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
+<head>
+    <link rel="stylesheet" href="css/car_sell.css">
+    <link rel="icon" type="image/car-icaon" href="img/favicon.png">
+</head>
 <body>
-    
+    @using Entities.Concrete
+    @{
+        ViewData["Title"] = "Products";
+    }
+    <h1>Product List</h1>
+    <div class="container">
+        <div class="upper-row">
+            <section class="filter-column" style="width: 50%">
+                <form class="scrl">
+                    <b>Car Model</b>
+                    <span class="form-group selectBrand" id="brandRadioButtons">
+                                                
+                    </span>
+                    <hr style="border-top: 1px solid #908f8f" />
 
-    <section class="car_tıtle">
-        <div class="title">
-            <h2>CAR TITLE</h2>
-        </div>
-        <div class="container" style="display: flex; flex-direction: row; grid-gap: 1rem">
-            <div class="car-big" style="width: 25%; display: flex; flex-direction: column; grid-gap: 0.5rem">
-                <a href="https://cdn.discordapp.com/attachments/1169697645309198408/1169708515875627049/image.png?ex=655662f2&is=6543edf2&hm=ceab3df9866e6f447cec0f009b5329bab90a8c5d70014b6e104ac3af03e16d0c&" data-lightbox="car-gallery" data-title="Büyük araba">
-                    <img src="https://cdn.discordapp.com/attachments/1169697645309198408/1169708515875627049/image.png?ex=655662f2&is=6543edf2&hm=ceab3df9866e6f447cec0f009b5329bab90a8c5d70014b6e104ac3af03e16d0c&" alt="Büyük araba">
-                </a>
-            </div>
-            <ul class="car-info">
-                <li><strong>Primary key: x</strong></li>
-                <hr style="border-top: 1px solid #000000" />
-                <li><strong>Marka: Marka 1</strong></li>
-                <hr style="border-top: 1px solid #000000" />
-                <li><strong>Model: Model 1</strong></li>
-                <hr style="border-top: 1px solid #000000" />
-                <li><strong>Yıl: 2023</strong></li>
-            </ul>
-            <div class="car-small">
-                <a href="https://cdn.discordapp.com/attachments/1169697645309198408/1169708577301205094/image.png?ex=65566300&is=6543ee00&hm=f722eb9989bc3d41c2d39dcc2155670d3b036902bdebdbad19da3602c434284a&" data-lightbox="car-gallery" data-title="Küçük araba 1">
-                    <img src="https://cdn.discordapp.com/attachments/1169697645309198408/1169708577301205094/image.png?ex=65566300&is=6543ee00&hm=f722eb9989bc3d41c2d39dcc2155670d3b036902bdebdbad19da3602c434284a&" alt="Küçük araba 1">
-                </a>
-            </div>
-            <div class="car-small">
-                <a href="https://cdn.discordapp.com/attachments/1169697645309198408/1169708614185914408/image.png?ex=65566309&is=6543ee09&hm=3601e35de788c36526d1911c51a5f954ad820739666ff033839c73cf9360f98a&" data-lightbox="car-gallery" data-title="Küçük araba 2">
-                    <img src="https://cdn.discordapp.com/attachments/1169697645309198408/1169708614185914408/image.png?ex=65566309&is=6543ee09&hm=3601e35de788c36526d1911c51a5f954ad820739666ff033839c73cf9360f98a&" alt="Küçük araba 2">
-                </a>
-            </div>
-        </div>
-    </section>
+                    <b>Color</b>
+                    <span class="form-group selectColor" id="colorRadioButtons">  
 
-    
+                    </span>
+                    <hr style="border-top: 1px solid #908f8f" />
+
+                    <div class="form-group">
+                        <b>Model Year</b>
+                        <label for="unitYear"></label>
+                        <input type="number" class="form-control" id="unitYear" name="UnityEAR" placeholder="Input your model year" required />
+                    </div>
+                    <hr style="border-top: 1px solid #908f8f" />
+
+                    <div class="form-group">
+                        <b>Km</b>
+                        <label for="unitKm"></label>
+                        <input type="number" class="form-control" id="unitKm" name="UnityEAR" placeholder="Input your km" required />
+                    </div>
+                    <hr style="border-top: 1px solid #908f8f" />
+
+                    <div class="form-group">
+                        <b>Price</b>
+                        <label for="unitPrice"></label>
+                        <input type="number" class="form-control" id="unitPrice" name="UnitPrice" placeholder="Input your price" required />
+                    </div>
+                    <hr style="border-top: 1px solid #908f8f" />
+                </form>
+            </section>
+
+            <div class="image-column" style="width: 50%">
+                <div class="form-group">
+                    <label for="imageUpload"></label>
+                    <b class="image-title">Upload Images</b>
+                    <div class="upload-btn-wrapper">
+                        <button class="btn-upload overlay-button">Choose files</button>
+                        <input type="file" name="imageUpload" id="imageUpload" accept="image/*" multiple>
+                    </div>
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="info-column">
+            <section class="form-group">
+                <b>Info</b>
+                <label for="carinfo"></label>
+                <textarea name="carinfo" id="carinfo" rows="15" cols="90" wrap="soft" placeholder="Type Car Info"></textarea>
+            </section>
+            <section class="form-group">
+                <button class="btn-upload overlay-button" id="saveButton">Save</button>
+                <button class="btn-upload overlay-button" id="clearButton">Clear</button>
+            </section>
+        </div>
+
+
+    </div>
+
+
 
     <script src="js/main.js"></script>
 
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            loadBrandOptions();
+            loadColorOptions();
+
+        });
+
+
+        document.getElementById('imageUpload').addEventListener('change', function (event) {
+            var files = event.target.files;
+            var label = document.querySelector('.btn-upload');
+            label.innerHTML = files.length + ' file(s) selected';
+
+
+            displayImagePreviews(files);
+        });
+
+        function displayImagePreviews(files) {
+            var imagePreviewContainer = document.getElementById('imagePreview');
+
+            for (var i = 0; i < files.length; i++) {
+                var reader = new FileReader();
+                var file = files[i];
+
+                reader.onload = function (e) {
+                    var imagePreview = document.createElement('div');
+                    imagePreview.className = 'image-preview';
+
+                    var img = new Image();
+                    img.src = e.target.result;
+                    img.className = 'img-thumbnail';
+
+                    imagePreview.appendChild(img);
+                    imagePreview.innerHTML += '<span class="remove-image" onclick="removeImage(this)">X</span>';
+
+                    imagePreviewContainer.appendChild(imagePreview);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeImage(element) {
+            var imagePreviewContainer = document.getElementById('imagePreview');
+            var imagePreview = element.parentElement;
+            imagePreviewContainer.removeChild(imagePreview);
+
+
+            var label = document.querySelector('.btn-upload');
+            var fileInput = document.getElementById('imageUpload');
+            label.innerHTML = fileInput.files.length + ' file(s) selected';
+        }
+
+        function displayImagePreviews(files) {
+            var imagePreviewContainer = document.getElementById('imagePreview');
+
+            for (var i = 0; i < files.length; i++) {
+                var reader = new FileReader();
+                var file = files[i];
+
+                reader.onload = function (e) {
+                    var imagePreview = document.createElement('div');
+                    imagePreview.className = 'image-preview';
+
+                    var img = new Image();
+                    img.src = e.target.result;
+                    img.className = 'img-thumbnail';
+
+                    // Boyutlandırma
+                    img.onload = function () {
+                        var canvas = document.createElement('canvas');
+                        var ctx = canvas.getContext('2d');
+                        canvas.width = 100;
+                        canvas.height = 100;
+                        ctx.drawImage(img, 0, 0, 100, 100);
+
+                        // Yeniden boyutlandırılmış resmi ekleyin
+                        var thumbnail = new Image();
+                        thumbnail.src = canvas.toDataURL();
+                        thumbnail.className = 'img-thumbnail';
+
+                        imagePreview.appendChild(thumbnail);
+                        imagePreview.innerHTML += '<span class="remove-image" onclick="removeImage(this)">X</span>';
+
+                        imagePreviewContainer.appendChild(imagePreview);
+                    };
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        //-----------------------------------------Backend Func.
+
+        
+
+        $("#saveAdd").click(function () {
+            var car = {
+                ColorId: $("#colorId").val(),
+                BrandId: $("#brandId").val(),
+                ModelYear: $("#modelYear").val(),
+                Price: $("#price").val(),
+                Description: $("#description").val()
+            };
+            var img = {
+                Image1: $("ımage").val(),
+                CarId: $("carId").val()
+            };
+
+            $.ajax({
+                url: "@Url.Action("CarAdd","CarSell")",
+                method: "POST",
+                dataType: "json",
+                data: car,
+                success: function (response) {
+                }
+            });
+            $.ajax({
+                url: "@Url.Action("ImageAdd","CarSell")",
+                method: "POST",
+                dataType: "json",
+                data: img,
+                success: function (response) {
+                }
+            });
+        });
+
+
+        function loadBrandOptions() {
+            $.ajax({
+                url: "@Url.Action("GetBrands","CarSell")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {                    
+                    var radioContainer = $("#brandRadioButtons");
+                    radioContainer.empty();
+
+                    // Check if there is data in the response
+                    if (response && response.data) {
+                        response.data.forEach(function (item) {
+                            // Create a radio button for each brand
+                            var radioHtml = '<label>';
+                            radioHtml += '<input type="radio" name="brand" value="' + item.id + '" autocomplete="off">';
+                            radioHtml += '<a>' + item.name + '</a>';
+                            radioHtml += '</label>';
+
+                            // Append the radio button to the container
+                            radioContainer.append(radioHtml);
+                        });
+                    }
+
+                }
+            });
+        }
+
+        function loadColorOptions() {
+            $.ajax({
+                url: "@Url.Action("GetColors","CarSell")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {
+                    var radioContainer = $("#colorRadioButtons");
+                    radioContainer.empty();
+
+                    // Check if there is data in the response
+                    if (response && response.data) {
+                        response.data.forEach(function (item) {
+                            // Create a radio button for each brand
+                            var radioHtml = '<label>';
+                            radioHtml += '<input type="radio" name="brand" value="' + item.id + '" autocomplete="off">';
+                            radioHtml += '<a>' + item.name + '</a>';
+                            radioHtml += '</label>';
+
+                            // Append the radio button to the container
+                            radioContainer.append(radioHtml);
+                        });
+                    }
+
+                }
+            });
+        }
+        
+
+
+
+    </script>
 </body>
 </html>

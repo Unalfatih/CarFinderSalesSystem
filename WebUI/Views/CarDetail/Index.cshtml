@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/car_detail.css">
+</head>
+<body>
+
+    <section class="car_tıtle">
+        <div class="title">
+            <h2>CAR TITLE</h2>
+        </div>
+
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; width: 100%">
+            <div style="width: 25%; padding: 0.5rem">
+                <img class="hover-shadow cursor" src="img/car1.jpg" style="width:100%" onclick="openModal();currentSlide(1)" alt="Car 1">
+            </div>
+            <div style="width: 25%; padding: 0.5rem">
+                <img class="hover-shadow cursor" src="img/car2.jpg" style="width:100%" onclick="openModal();currentSlide(2)" alt="Car 2">
+            </div>
+            <div style="width: 25%; padding: 0.5rem">
+                <img class="hover-shadow cursor" src="img/car3.jpg" style="width:100%" onclick="openModal();currentSlide(3)" alt="Car 3">
+            </div>
+            <div style="width: 25%; padding: 0.5rem">
+                <img class="hover-shadow cursor" src="img/car4.jpg" style="width:100%" onclick="openModal();currentSlide(4)" alt="Car 4">
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+
+                <div class="mySlides">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="img/car1.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="img/car2.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">3 / 3</div>
+                    <img src="img/car3.jpg" style="width:100%">
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="img/car1.jpg" style="width:100%" onclick="currentSlide(1)" alt="Car 1">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="img/car2.jpg" style="width:100%" onclick="currentSlide(2)" alt="Car 2">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="img/car3.jpg" style="width:100%" onclick="currentSlide(3)" alt="Car 3">
+                </div>
+            </div>
+        </div>
+        <ul class="car-info">
+            <li><strong>Primary key</strong><span>x</span></li>
+            <hr style="border-top: 1px solid #000000" />
+            <li><strong>Marka</strong><span>Marka 1</span></li>
+            <hr style="border-top: 1px solid #000000" />
+            <li><strong>Model</strong><span>Model 1</span></li>
+            <hr style="border-top: 1px solid #000000" />
+            <li><strong>Yıl</strong><span>2023</span></li>
+        </ul>
+    </section>
+
+    <!--footer-->
+    <footer class="copyright">
+        <div class="up" id="up">
+            <p>&copy car rental</p>
+        </div>
+    </footer>
+
+    <script>
+
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            var captionText = document.getElementById("caption");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+
+    </script>
+
+</body>
+</html>
+
+
+
+

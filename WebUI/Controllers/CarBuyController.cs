@@ -18,10 +18,23 @@ namespace WebUI.Controllers
             return View();
         }
 
-        public List<CarDetailsDto> GetCarDetails()
+        [HttpPost]
+        public List<CarDetailsDto> GetCarDetails(int? brandFilter)
         {
-            var cars = _carService.GetCarDetails().Data;
-            return cars;
+            if (brandFilter.HasValue)
+            {
+                var cars = _carService.GetCarDetailsByBrandId(brandFilter.Value).Data;
+                return cars;
+            }
+            else
+            {
+
+                var cars = _carService.GetCarDetails().Data;
+                return cars;
+            }
+
         }
+
+
     }
 }

@@ -14,36 +14,30 @@
     <!--home-->
     <section class="home" id="home" style="display: flex; flex-direction: row; grid-gap: 1rem">
         <div style="width: 25%; display: flex; flex-direction: column; grid-gap: 0.5rem">
-            <label for="search">Filtreleme</label>
+            <label for="search">FILTERING</label>
             <input id="search" placeholder="Arama Yap..." type="text">
 
-            <label for="filter_brand">Marka Seç</label>
+            <label for="filter_brand">BRAND</label>
             <select id="filter_brand"></select>
 
-            <label for="color">Color</label>
+            <label for="color">COLOR</label>
             <select id="color"></select>
 
-            <label for="fuel">Fuel</label>
+            <label for="fuel">FUEL TYPE</label>
             <select id="fuel"></select>
 
-            <label for="country">Country</label>
-            <select id="country"></select>
-
-            <label for="gear">Gear</label>
+            <label for="gear">GEAR TYPE</label>
             <select id="gear"></select>
 
-            <label for="case_type">Case Type</label>
-            <select id="case_type"></select>
-
-            <label>Price</label>
+            <label>YEAR</label>
             <form class="ff_v8">
                 <span class="fpl_v8">
                     <input type="hidden" id="pfbu1" value="">
-                    <div id="pfb1">Please enter price range</div>
+                    <div id="pfb1">Please enter year range</div>
                     <span class="pf_iw">
-                        <input id="pf1" placeholder="minimum" type="text" maxlength="10" value>
+                        <input id="pf1" placeholder="minimum" type="number" maxlength="4" value="">
                         <text>-</text>
-                        <input id="pf2" placeholder="maximum" type="text" maxlength="10" value>
+                        <input id="pf2" placeholder="maximum" type="number" maxlength="4" value="">
                         <button>
                             >
                         </button>
@@ -51,15 +45,31 @@
                 </span>
             </form>
 
-            <label>Km</label>
+            <label>PRICE</label>
+            <form class="ff_v8">
+                <span class="fpl_v8">
+                    <input type="hidden" id="pfbu1" value="">
+                    <div id="pfb1">Please enter km range</div>
+                    <span class="pf_iw">
+                        <input id="pf1" placeholder="minimum" type="number" maxlength="15" value="">
+                        <text>-</text>
+                        <input id="pf2" placeholder="maximum" type="number" maxlength="15" value="">
+                        <button>
+                            >
+                        </button>
+                    </span>
+                </span>
+            </form>
+
+            <label>KM</label>
             <form class="ff_v8">
                 <span class="fpl_v8">
                     <input type="hidden" id="pfbu2" value="">
                     <div id="pfb2">Please enter price range</div>
                     <span class="pf_iw">
-                        <input id="pf3" placeholder="minimum" type="text" maxlength="10" value>
+                        <input id="pf3" placeholder="minimum" type="text" maxlength="10" value="">
                         <text>-</text>
-                        <input id="pf4" placeholder="maximum" type="text" maxlength="10" value>
+                        <input id="pf4" placeholder="maximum" type="text" maxlength="10" value="">
                         <button>
                             >
                         </button>
@@ -96,13 +106,6 @@
         </div>
     </section>
 
-    <!--footer-->
-    <footer class="copyright">
-        <div class="up" id="up">
-            <p>&copy car rental</p>
-        </div>
-    </footer>
-
     <script src="js/main.js"></script>
 
     <script>
@@ -117,35 +120,38 @@
         filter_brand_select.innerHTML = ['marka1', 'marka2', 'marka3'].map(item => '<option>' + item + '</option>')
 
 
+
+
+
+
+
         function loadCarList() {
             var tbody = $("#list_data");
             tbody.empty();
+
+            const urlParams = new URLSearchParams(window.location.search);
 
             $.ajax({
                 url: "@Url.Action("GetCarDetails","CarBuy")",
                 method: "POST",
                 dataType: "json",
+                data: {
+                    brandFilter: urlParams.get('brandFilter'),
+                }, // Filtre parametresini gönder
                 success: function (response) {
                     $.each(response, function (index, item) {
-
-                        //var hexData = item.carImage;
-
-                        //var base64Data = hexToBase64(hexData);
-
-                        //var imageUrl = 'data:image/jpeg;base64,' + base64Data;
-
-
+                        console.log(item)
                         var row = `
-                                        <tr>
-                                            <td>${item.brandName}</td>
-                                            <td>${item.colorName}</td>
-                                            <td>${item.price}</td>
-                                            <td>${item.modelYear}</td>
-                                            <td>${item.carImage}</td>
-                                            <td>
-                                                <button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button>
-                                            </td>
-                                        </tr>`;
+                                    <tr>
+                                        <td>${item.brandName}</td>
+                                        <td>${item.colorName}</td>
+                                        <td>${item.price}</td>
+                                        <td>${item.modelYear}</td>
+                                        <td>${item.carImage}</td>
+                                        <td>
+                                            <button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button>
+                                        </td>
+                                    </tr>`;
                         tbody.append(row);
                     });
                 },
@@ -154,6 +160,7 @@
                 }
             });
         }
+
 
     </script>
 

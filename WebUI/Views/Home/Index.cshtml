@@ -6,25 +6,17 @@
 <html lang="en">
 
 <head>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <style>
-        body {
-            background-image: url('/wwwroot/img/background.png'); /* Resmin dosya yolunu düzgün bir şekilde belirtin */
-            background-size: cover; /* Resmi kaplamak için */
-            background-repeat: no-repeat; /* Tekrarlamayı önlemek için */
-            background-attachment: fixed; /* Kaydırma sırasında sabit kalması için */
-            /* Diğer stil ayarlamaları buraya ekleyebilirsiniz */
-        }
-
-        /* Diğer stil ayarlamaları buraya ekleyebilirsiniz */
-    </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    
+
 
     <!--home-->
-    <section class="home" id="home" >
-        <div class="text")>
+    <section class="home" id="home" style="background-image: url(img/background.png);
+             background-repeat: no-repeat;
+             background-position: center right;
+             background-size: cover;">
+        <div class="text">
             <h1><span>Looking</span> to <br>rent a car</h1>
             <p>Lorem ipsum dolor sit amet consectetur adi <br>pisicing elit. Fuga, ut qui.</p>
         </div>
@@ -39,10 +31,10 @@
         <div class="container">
             <div class="box">
                 <div class="imgBox">
-                    <a href="CarBuy">
-                        <button class="button_Audi"><img src="img/audi.jpg" alt="" /></button>
+                    <a href="CarBuy?brandFilter=1">
+                        <img src="img/audi.jpg" alt="" />
                     </a>
-                    
+
                 </div>
                 <div class="content">
                     <a><span>AUDI</span></a>
@@ -51,7 +43,9 @@
 
             <div class="box">
                 <div class="imgBox">
-                    <button class="button_Honda"><img src="img/honda.jpg" alt="" /></button>
+                    <a href="CarBuy?brandFilter=2">
+                        <img src="img/honda.jpg" alt="" />
+                    </a>
                 </div>
                 <div class="content">
                     <a><span>HONDA</span></a>
@@ -60,7 +54,9 @@
 
             <div class="box">
                 <div class="imgBox">
-                    <button class="button_Mercedes"><img src="img/mercedes.jpg" alt="" /></button>
+                    <a href="CarBuy?brandFilter=3">
+                        <img src="img/mercedes.jpg" alt="" />
+                    </a>
                 </div>
                 <div class="content">
                     <a><span>MERCEDES</span></a>
@@ -69,7 +65,9 @@
 
             <div class="box">
                 <div class="imgBox">
-                    <button class="button_Toyota"><img src="img/toyota.jpg" alt="" /></button>
+                    <a href="CarBuy?brandFilter=4">
+                        <img src="img/toyota.jpg" alt="" />
+                    </a>
                 </div>
                 <div class="content">
                     <a><span>TOYOTA</span></a>
@@ -78,7 +76,9 @@
 
             <div class="box">
                 <div class="imgBox">
-                    <button class="button_Ds"><img src="img/ds.jpg" alt="" /></button>
+                    <a href="CarBuy?brandFilter=5">
+                        <img src="img/ds.jpg" alt="" />
+                    </a>
                 </div>
                 <div class="content">
                     <a><span>DS</span></a>
@@ -87,17 +87,20 @@
 
             <div class="box">
                 <div class="imgBox">
-                    <button class="button_Bmw"><img src="img/bmw.jpg" alt="" /></button>
+                    <a href="CarBuy?brandFilter=6">
+                        <img src="img/bmw.jpg" alt="" />
+                    </a>
                 </div>
                 <div class="content">
                     <a><span>BMW</span></a>
                 </div>
             </div>
         </div>
-        <hr style="border-top: 5px double #000000" />
     </section>
 
     <!--about-->
+
+    <hr style="border-top: 5px double #000000" />
     <section class="about" id="about">
         <div class="description">
             <div class="column_one">
@@ -138,22 +141,8 @@
         </div>
     </section>
 
-    <script src="js/main.js"></script>
-    <script>
-        
-        //$(document).on("click", ".buttonAudi",function(){
-        //    var carId = 1;
-        //    getCarDetailsDto(carId);
 
-        //});    
-     
-    
-    
-    
-    
-    
-    
-    </script>
+    <script src="js/main.js"></script>
 
 
 

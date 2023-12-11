@@ -36,6 +36,12 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ImageManager>().As<IImageService>().SingleInstance();
             builder.RegisterType<EfImageDal>().As<IImageDal>().SingleInstance();
 
+            builder.RegisterType<FuelManager>().As<IFuelService>().SingleInstance();
+            builder.RegisterType<EfFuelDal>().As<IFuelDal>().SingleInstance();
+
+            builder.RegisterType<GearManager>().As<IGearService>().SingleInstance();
+            builder.RegisterType<EfGearDal>().As<IGearDal>().SingleInstance();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

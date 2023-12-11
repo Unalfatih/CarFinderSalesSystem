@@ -19,6 +19,14 @@ namespace Entities.DTOs
 
         public string BrandName { get; set; } = null!;
 
+        public int FuelId { get; set; }
+
+        public string FuelName { get; set; } = null!;
+
+        public int GearId { get; set; }
+
+        public string GearName { get; set; } = null!;
+
         public int ModelYear { get; set; }
 
         public decimal Price { get; set; }

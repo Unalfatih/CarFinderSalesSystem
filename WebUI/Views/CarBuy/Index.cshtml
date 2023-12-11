@@ -17,17 +17,17 @@
             <label for="search">FILTERING</label>
             <input id="search" placeholder="Arama Yap..." type="text">
 
-            <label for="filter_brand">BRAND</label>
-            <select id="filter_brand"></select>
+            <label for="brandSelect">BRAND</label>
+            <select id="brandSelect"></select>
 
-            <label for="color">COLOR</label>
-            <select id="color"></select>
+            <label for="colorSelect">COLOR</label>
+            <select id="colorSelect"></select>
 
-            <label for="fuel">FUEL TYPE</label>
-            <select id="fuel"></select>
+            <label for="fuelSelect">FUEL TYPE</label>
+            <select id="fuelSelect"></select>
 
-            <label for="gear">GEAR TYPE</label>
-            <select id="gear"></select>
+            <label for="gearSelect">GEAR TYPE</label>
+            <select id="gearSelect"></select>
 
             <label>YEAR</label>
             <form class="ff_v8">
@@ -91,6 +91,8 @@
                         <tr>
                             <th>Brand Name</th>
                             <th>Color Name</th>
+                            <th>Fuel</th>
+                            <th>Gear</th>
                             <th>Price</th>
                             <th>Model Year</th>
                             <th>Image</th>
@@ -112,12 +114,16 @@
         $(document).ready(function () {
 
             loadCarList();
+            loadBrandOptions();
+            loadColorOptions();
+            loadFuelOptions();
+            loadGearOptions();
 
         });
 
 
-        const filter_brand_select = document.getElementById('filter_brand')
-        filter_brand_select.innerHTML = ['marka1', 'marka2', 'marka3'].map(item => '<option>' + item + '</option>')
+        //const filter_brand_select = document.getElementById('filter_brand')
+        //filter_brand_select.innerHTML = ['marka1', 'marka2', 'marka3'].map(item => '<option>' + item + '</option>')
 
 
 
@@ -145,6 +151,8 @@
                                     <tr>
                                         <td>${item.brandName}</td>
                                         <td>${item.colorName}</td>
+                                        <td>${item.fuelName}</td>
+                                        <td>${item.gearName}</td>
                                         <td>${item.price}</td>
                                         <td>${item.modelYear}</td>
                                         <td>${item.carImage}</td>
@@ -160,6 +168,75 @@
                 }
             });
         }
+
+        function loadBrandOptions() {
+            $.ajax({
+                url: "@Url.Action("GetBrands","CarBuy")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {
+                    var select = $("#brandSelect");
+                    select.empty();
+                    select.append('<option value="">Select a brand</option>');
+                    response?.data?.map(item => {
+                        select.append('<option value="' + item.id + '">' + item.name + '</option>');
+                    })
+
+                }
+            });
+        }
+
+        function loadColorOptions() {
+            $.ajax({
+                url: "@Url.Action("GetColors","CarBuy")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {
+                    var select = $("#colorSelect");
+                    select.empty();
+                    select.append('<option value="">Select a color</option>');
+                    response?.data?.map(item => {
+                        select.append('<option value="' + item.id + '">' + item.name + '</option>');
+                    })
+
+                }
+            });
+        }
+
+        function loadFuelOptions() {
+            $.ajax({
+                url: "@Url.Action("GetFuels","CarBuy")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {
+                    var select = $("#fuelSelect");
+                    select.empty();
+                    select.append('<option value="">Select a fuel type</option>');
+                    response?.data?.map(item => {
+                        select.append('<option value="' + item.id + '">' + item.name + '</option>');
+                    })
+
+                }
+            });
+        }
+        function loadGearOptions() {
+            $.ajax({
+                url: "@Url.Action("GetGears","CarBuy")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {
+                    var select = $("#gearSelect");
+                    select.empty();
+                    select.append('<option value="">Select a gear type</option>');
+                    response?.data?.map(item => {
+                        select.append('<option value="' + item.id + '">' + item.name + '</option>');
+                    })
+
+                }
+            });
+        }
+
+
 
 
     </script>

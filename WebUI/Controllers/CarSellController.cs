@@ -36,7 +36,7 @@ namespace WebUI.Controllers
             {
                 return new SuccessDataResult<List<Brand>>(brands.Data);
             }
-            return new ErrorDataResult<List<Brand>>("Data Error!");
+            return new ErrorDataResult<List<Brand>>("Brand Data Error!");
         }
 
         [HttpPost]
@@ -47,7 +47,7 @@ namespace WebUI.Controllers
             {
                 return new SuccessDataResult<List<Color>>(colors.Data);
             }
-            return new ErrorDataResult<List<Color>>("Data Error!");
+            return new ErrorDataResult<List<Color>>("Color Data Error!");
         }
     }
 }

@@ -7,6 +7,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
 
 
+
     public partial class CarFinderSalesSystemContext : DbContext
     {
         public CarFinderSalesSystemContext()
@@ -24,6 +25,10 @@ namespace DataAccess.Concrete.EntityFramework
 
         public virtual DbSet<Color> Colors { get; set; }
 
+        public virtual DbSet<Fuel> Fuels { get; set; }
+
+        public virtual DbSet<Gear> Gears { get; set; }
+
         public virtual DbSet<Image> Images { get; set; }
 
         public virtual DbSet<Notice> Notices { get; set; }
@@ -31,7 +36,6 @@ namespace DataAccess.Concrete.EntityFramework
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
             => optionsBuilder.UseSqlServer("Server=UNAL;Database=CarFinder/SalesSystem;Trusted_Connection=True;TrustServerCertificate=true;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -63,6 +67,16 @@ namespace DataAccess.Concrete.EntityFramework
                     .HasForeignKey(d => d.ColorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Cars_Colors");
+
+                entity.HasOne(d => d.Fuel).WithMany(p => p.Cars)
+                    .HasForeignKey(d => d.FuelId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cars_Fuel");
+
+                entity.HasOne(d => d.Gear).WithMany(p => p.Cars)
+                    .HasForeignKey(d => d.GearId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Cars_Gear");
             });
 
             modelBuilder.Entity<Color>(entity =>
@@ -74,9 +88,26 @@ namespace DataAccess.Concrete.EntityFramework
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<Fuel>(entity =>
+            {
+                entity.ToTable("Fuel");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Gear>(entity =>
+            {
+                entity.ToTable("Gear");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Image>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
                 entity.Property(e => e.Image1)
                     .HasColumnType("image")
                     .HasColumnName("Image");

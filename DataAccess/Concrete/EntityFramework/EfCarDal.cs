@@ -19,14 +19,20 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from p in context.Cars
                              join b in context.Brands on p.BrandId equals b.Id
                              join c in context.Colors on p.ColorId equals c.Id
+                             join f in context.Fuels on p.FuelId equals f.Id
+                             join g in context.Gears on p.GearId equals g.Id
                              join i in context.Images on p.Id equals i.CarId
                              select new CarDetailsDto
                              {
                                  Id = p.Id,
                                  ColorId = c.Id,
                                  BrandId = b.Id,
+                                 FuelId = f.Id,
+                                 GearId = g.Id,
                                  BrandName = b.Name,
                                  ColorName = c.Name,
+                                 FuelName = f.Name,
+                                 GearName = g.Name,
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,
@@ -44,6 +50,8 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from p in context.Cars                            
                              join c in context.Colors on p.ColorId equals c.Id
+                             join f in context.Fuels on p.FuelId equals f.Id
+                             join g in context.Gears on p.GearId equals g.Id
                              join i in context.Images on p.Id equals i.CarId
                              join b in context.Brands on p.BrandId equals b.Id
                              where b.Id == brandId
@@ -52,8 +60,12 @@ namespace DataAccess.Concrete.EntityFramework
                                  Id = p.Id,
                                  ColorId = c.Id,
                                  BrandId = b.Id,
+                                 FuelId = f.Id,
+                                 GearId = g.Id,
                                  BrandName = b.Name,
                                  ColorName = c.Name,
+                                 FuelName = f.Name,
+                                 GearName = g.Name,
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,

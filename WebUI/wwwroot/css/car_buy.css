@@ -104,6 +104,8 @@ header .logo {
 
 .home {
     background: var(--back-color);
+    width: 100%;
+    height: 100%;
 }
 
 .title:before {
@@ -184,7 +186,8 @@ header .logo {
     }
 
 select {
-    border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px; 
+    height : 30px;
 }
 
 label {
@@ -430,4 +433,8 @@ tr:nth-child(even) {
 /* Tablonun tam geniþliðe yayýlmasýný saðlama */
 .table-wrapper {
     overflow-x: auto;
+}
+
+text{
+    color:black
 }

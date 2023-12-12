@@ -67,7 +67,7 @@
             <section class="form-group">
                 <b>Info</b>
                 <label for="carinfo"></label>
-                <textarea name="carinfo" id="carinfo" rows="15" cols="90" wrap="soft" placeholder="Type Car Info"></textarea>
+                <textarea name="carinfo" id="carinfo" rows="15" cols="80" wrap="soft" placeholder="Type Car Info"></textarea>
             </section>
             <section class="form-group">
                 <button class="btn-upload overlay-button" id="saveButton">Save</button>
@@ -229,7 +229,7 @@
                         response.data.forEach(function (item) {
                             // Create a radio button for each brand
                             var radioHtml = '<label>';
-                            radioHtml += '<input type="radio" name="brand" value="' + item.id + '" autocomplete="off">';
+                            radioHtml += '<input id="brand" type="radio" name="brand" value="' + item.id + '" autocomplete="off">';
                             radioHtml += '<a>' + item.name + '</a>';
                             radioHtml += '</label>';
 
@@ -256,7 +256,7 @@
                         response.data.forEach(function (item) {
                             // Create a radio button for each brand
                             var radioHtml = '<label>';
-                            radioHtml += '<input type="radio" name="brand" value="' + item.id + '" autocomplete="off">';
+                            radioHtml += '<input id="color" type="radio" name="brand" value="' + item.id + '" autocomplete="off">';
                             radioHtml += '<a>' + item.name + '</a>';
                             radioHtml += '</label>';
 

@@ -246,6 +246,7 @@ header .logo {
     position: absolute;
     text-align: center;
     background-color: #CCCCCC;
+    border-bottom: 0;
 }
 
 

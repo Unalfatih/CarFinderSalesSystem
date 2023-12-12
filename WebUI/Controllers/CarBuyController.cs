@@ -88,5 +88,18 @@ namespace WebUI.Controllers
             }
             return new ErrorDataResult<List<Gear>>("Gear Data Error!");
         }
+
+        [HttpPost]
+        public List<CarDetailsDto> GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minYear, int? maxYear)
+        {
+            var cars = _carService.GetFilteredCarDetails(brandId,  colorId, fuelId, gearId, minPrice, maxPrice, minYear, maxYear).Data;
+            return cars;
+
+            //if (cars.Success)
+            //{
+            //    return new SuccessDataResult<List<CarDetailsDto>>(cars.Data);
+            //}
+            //return new ErrorDataResult<List<CarDetailsDto>>("Car Filtered Error!");
+        }
     }
 }

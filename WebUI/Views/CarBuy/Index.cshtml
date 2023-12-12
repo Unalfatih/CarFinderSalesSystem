@@ -14,8 +14,8 @@
     <!--home-->
     <section class="home" id="home" style="display: flex; flex-direction: row; grid-gap: 1rem">
         <div style="width: 25%; display: flex; flex-direction: column; grid-gap: 0.5rem">
-            <label for="search">FILTERING</label>
-            <input id="search" placeholder="Arama Yap..." type="text">
+            <h2 for="search">FILTERING</h2>
+            
 
             <label for="brandSelect">BRAND</label>
             <select id="brandSelect"></select>
@@ -35,12 +35,10 @@
                     <input type="hidden" id="pfbu1" value="">
                     <div id="pfb1">Please enter year range</div>
                     <span class="pf_iw">
-                        <input id="pf1" placeholder="minimum" type="number" maxlength="4" value="">
+                        <input id="yearMin" placeholder="minimum" type="number" maxlength="4" value="">
                         <text>-</text>
-                        <input id="pf2" placeholder="maximum" type="number" maxlength="4" value="">
-                        <button>
-                            >
-                        </button>
+                        <input id="yearMax" placeholder="maximum" type="number" maxlength="4" value="">
+                        
                     </span>
                 </span>
             </form>
@@ -49,14 +47,12 @@
             <form class="ff_v8">
                 <span class="fpl_v8">
                     <input type="hidden" id="pfbu1" value="">
-                    <div id="pfb1">Please enter km range</div>
+                    <div id="pfb1">Please enter price range</div>
                     <span class="pf_iw">
-                        <input id="pf1" placeholder="minimum" type="number" maxlength="15" value="">
+                        <input id="priceMin" placeholder="minimum" type="number" maxlength="15" value="">
                         <text>-</text>
-                        <input id="pf2" placeholder="maximum" type="number" maxlength="15" value="">
-                        <button>
-                            >
-                        </button>
+                        <input id="priceMax" placeholder="maximum" type="number" maxlength="15" value="">
+                        
                     </span>
                 </span>
             </form>
@@ -65,14 +61,12 @@
             <form class="ff_v8">
                 <span class="fpl_v8">
                     <input type="hidden" id="pfbu2" value="">
-                    <div id="pfb2">Please enter price range</div>
+                    <div id="pfb2">Please enter km range</div>
                     <span class="pf_iw">
-                        <input id="pf3" placeholder="minimum" type="text" maxlength="10" value="">
+                        <input id="pf3" placeholder="minimum" type="number" maxlength="10" value="">
                         <text>-</text>
-                        <input id="pf4" placeholder="maximum" type="text" maxlength="10" value="">
-                        <button>
-                            >
-                        </button>
+                        <input id="pf4" placeholder="maximum" type="number" maxlength="10" value="">
+                        
                     </span>
                 </span>
             </form>
@@ -80,7 +74,7 @@
             <div class="submit">
                 <button class="submit_button" id="btnSearch" type="button">Find Cars</button>
             </div>
-            <button class="delete_button" id="btnClear" type="button">Delete</button>
+            <button class="delete_button" id="btnClear" type="button">Clear</button>
 
         </div>
         <div style="width: 75%">
@@ -235,6 +229,73 @@
                 }
             });
         }
+
+
+        $("#btnSearch").click(function(){
+            var car = {
+                brandId: $("#brandSelect").val(),
+                colorId: $("#colorSelect").val(),
+                fuelId: $("#fuelSelect").val(),
+                gearId: $("#gearSelect").val(),
+                minPrice: $("#priceMin").val(),
+                maxPrice: $("#priceMax").val(),
+                minYear: $("#yearMin").val(),
+                maxYear: $("#yearMax").val(),
+            };
+            $.ajax({
+                url: "@Url.Action("GetFilteredCarDetails","CarBuy")",
+                method: "POST",
+                dataType: "json",
+                data: car,
+                success: function (response) {
+                    var tbody = $("#list_data");
+                    tbody.empty();
+                    $.each(response, function (index, item) {
+                        console.log(item)
+                        var row = `
+                            <tr>
+                                <td>${item.brandName}</td>
+                                <td>${item.colorName}</td>
+                                <td>${item.fuelName}</td>
+                                <td>${item.gearName}</td>
+                                <td>${item.price}</td>
+                                <td>${item.modelYear}</td>
+                                <td>${item.carImage}</td>
+                                <td>
+                                    <button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button>
+                                </td>
+                            </tr>`;
+                        tbody.append(row);
+                        
+                    });
+                }
+            
+            
+            });
+        });
+
+        function clearFiltersAndReloadList() {
+            // Filtre değerlerini temizle
+            $("#brandSelect").val('');
+            $("#colorSelect").val('');
+            $("#fuelSelect").val('');
+            $("#gearSelect").val('');
+            $("#priceMin").val('');
+            $("#priceMax").val('');
+            $("#yearMin").val('');
+            $("#yearMax").val('');
+
+            // Tablodaki verileri temizle
+            var tbody = $("#list_data");
+            tbody.empty();
+
+            // Araba listesini tekrar yükle
+            loadCarList();
+        }
+
+        $("#btnClear").click(function () {
+            clearFiltersAndReloadList();
+        });
 
 
 

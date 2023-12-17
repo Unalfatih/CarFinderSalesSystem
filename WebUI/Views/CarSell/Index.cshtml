@@ -26,6 +26,21 @@
                     </span>
                     <hr style="border-top: 1px solid #908f8f" />
 
+                    
+                    <b>Car Fuel</b>
+                    <span class="form-group selectFuel" id="fuelRadioButtons">
+
+                    </span>                       
+                    <hr style="border-top: 1px solid #C2BEBEFF" />
+
+
+                    <b>Car Gear</b>
+                    <span class="form-group selectGear" id="gearRadioButtons">
+
+                    </span>
+
+                    <hr style="border-top: 1px solid #C2BEBEFF" />
+
                     <div class="form-group">
                         <b>Model Year</b>
                         <label for="unitYear"></label>
@@ -91,6 +106,8 @@
 
             loadBrandOptions();
             loadColorOptions();
+            loadGearOptions();
+            loadFuelOptions();
 
         });
 
@@ -257,6 +274,58 @@
                             // Create a radio button for each brand
                             var radioHtml = '<label>';
                             radioHtml += '<input id="color" type="radio" name="color" value="' + item.id + '" autocomplete="off">';
+                            radioHtml += '<a>' + item.name + '</a>';
+                            radioHtml += '</label>';
+
+                            // Append the radio button to the container
+                            radioContainer.append(radioHtml);
+                        });
+                    }
+
+                }
+            });
+        }
+        function loadFuelOptions() {
+            $.ajax({
+                url: "@Url.Action("GetFuels","CarSell")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {
+                    var radioContainer = $("#fuelRadioButtons");
+                    radioContainer.empty();
+
+                    // Check if there is data in the response
+                    if (response && response.data) {
+                        response.data.forEach(function (item) {
+                            // Create a radio button for each brand
+                            var radioHtml = '<label>';
+                            radioHtml += '<input id="fuel" type="radio" name="fuel" value="' + item.id + '" autocomplete="off">';
+                            radioHtml += '<a>' + item.name + '</a>';
+                            radioHtml += '</label>';
+
+                            // Append the radio button to the container
+                            radioContainer.append(radioHtml);
+                        });
+                    }
+
+                }
+            });
+        }
+        function loadGearOptions() {
+            $.ajax({
+                url: "@Url.Action("GetGears","CarSell")",
+                method: "POST",
+                dataType: "json",
+                success: function (response) {
+                    var radioContainer = $("#gearRadioButtons");
+                    radioContainer.empty();
+
+                    // Check if there is data in the response
+                    if (response && response.data) {
+                        response.data.forEach(function (item) {
+                            // Create a radio button for each brand
+                            var radioHtml = '<label>';
+                            radioHtml += '<input id="gear" type="radio" name="gear" value="' + item.id + '" autocomplete="off">';
                             radioHtml += '<a>' + item.name + '</a>';
                             radioHtml += '</label>';
 

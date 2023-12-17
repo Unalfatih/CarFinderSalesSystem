@@ -14,7 +14,7 @@
     <!--home-->
     <section class="home" id="home" style="display: flex; flex-direction: row; grid-gap: 1rem">
         <div style="width: 25%; display: flex; flex-direction: column; grid-gap: 0.5rem">
-            <h2 for="search">FILTERING</h2>
+            <a class="filter">FILTERING</a>
             
 
             <label for="brandSelect">BRAND</label>
@@ -74,7 +74,9 @@
             <div class="submit">
                 <button class="submit_button" id="btnSearch" type="button">Find Cars</button>
             </div>
-            <button class="delete_button" id="btnClear" type="button">Clear</button>
+            <div class="delete">
+                <button class="delete_button" id="btnClear" type="button">Clear</button>
+            </div>
 
         </div>
         <div style="width: 75%">
@@ -117,14 +119,7 @@
         });
 
 
-        //const filter_brand_select = document.getElementById('filter_brand')
-        //filter_brand_select.innerHTML = ['marka1', 'marka2', 'marka3'].map(item => '<option>' + item + '</option>')
-
-
-
-
-
-
+        
 
         function loadCarList() {
             var tbody = $("#list_data");

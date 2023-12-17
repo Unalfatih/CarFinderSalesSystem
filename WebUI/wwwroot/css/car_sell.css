@@ -112,16 +112,6 @@ header .logo {
     font-weight: 500;
 }
 
-.header-btn .sign-in {
-    background: #474fa0;
-    color: #FFF;
-    border-radius: 0.5rem;
-}
-
-    .header-btn .sign-in:hover {
-        background: var(--main-color);
-    }
-
 .submit_button.static {
     position: sticky;
     background: transparent;
@@ -173,30 +163,6 @@ header .logo {
     .delete_button:hover {
         background: #474fa0;
     }
-
-.car_title {
-    background: var(--back-color);
-}
-
-
-.car_info {
-    padding-left: 110px;
-    padding-top: 50px;
-    display: flex;
-    flex-direction: column;
-    grid-gap: 0.5rem;
-}
-
-strong {
-    font-weight: 100;
-}
-
-.copyright {
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    background-color: #CCCCCC;
-}
 
 body {
     font-family: Arial, sans-serif;
@@ -254,9 +220,8 @@ b {
 }
 
 .form-group {
-    margin-bottom: 20px;
-    overflow-x: hidden;
-    overflow-y: auto;
+    margin-bottom: 30px;
+    overflow: auto;
     display: block;
     position: relative;
 }
@@ -307,6 +272,14 @@ b {
     margin-bottom: 20px;
 }
 
+.remove-image {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
 .upload-btn-wrapper {
     position: relative;
     overflow: hidden;
@@ -347,22 +320,23 @@ b {
     flex-direction: column;
     float: right !important;
     grid-gap: 1.5rem;
-    margin-left: 20px;
+    margin-left: 0;
 }
 
-.car-info {
-    text-align: left;
+.copyright {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    background-color: #CCCCCC;
 }
 
-    .car-info h2 {
-        font-size: 20px;
-        margin-top: 0;
-    }
+select{
+    border-radius:6px 6px 6px 6px;
+    height: 35px;
 
-    .car-info p {
-        margin: 10px 0;
-    }
+}
 
-.custom-file-input {
-    cursor: pointer;
+input {
+    height: 35px;
+    border-radius: 6px 6px 6px 6px;
 }

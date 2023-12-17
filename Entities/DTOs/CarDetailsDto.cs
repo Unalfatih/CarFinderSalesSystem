@@ -34,5 +34,6 @@ namespace Entities.DTOs
         public string Description { get; set; } = null!;
 
         public byte[]? CarImage { get; set; }
+        public int Kilometer { get; set; }
     }
 }

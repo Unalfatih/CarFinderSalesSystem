@@ -47,9 +47,11 @@ namespace Business.Concrete
             return new SuccessResult("Car Added");
         }
 
-        public IDataResult<List<CarDetailsDto>> GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minYear, int? maxYear)
+        public IDataResult<List<CarDetailsDto>> GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minKm, int? maxKm, int? minYear, int? maxYear)
         {
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetFilteredCarDetails(brandId, colorId, fuelId, gearId, minPrice, maxPrice, minYear, maxYear));
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetFilteredCarDetails(brandId, colorId, fuelId, gearId, minPrice, maxPrice,minKm,maxKm, minYear, maxYear));
         }
+
+        
     }
 }

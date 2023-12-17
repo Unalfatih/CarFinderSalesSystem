@@ -24,20 +24,6 @@ namespace Entities.Concrete
 
         public string CompanyName { get; set; } = null!;
 
-        public bool? Status { get; set; }
-
-        public DateTime? CreatedDate { get; set; }
-
-        public int? CreatedUserId { get; set; }
-
-        public DateTime? UpdatedDate { get; set; }
-
-        public int? UpdatedId { get; set; }
-
-        public bool? IsActive { get; set; }
-
-        public bool? IsDeleted { get; set; }
-
         public virtual ICollection<Notice> Notices { get; set; } = new List<Notice>();
     }
 }

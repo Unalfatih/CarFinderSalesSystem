@@ -63,9 +63,9 @@
                     <input type="hidden" id="pfbu2" value="">
                     <div id="pfb2">Please enter km range</div>
                     <span class="pf_iw">
-                        <input id="pf3" placeholder="minimum" type="number" maxlength="10" value="">
+                        <input id="kilometerMin" placeholder="minimum" type="number" maxlength="10" value="">
                         <text>-</text>
-                        <input id="pf4" placeholder="maximum" type="number" maxlength="10" value="">
+                        <input id="kilometerMax" placeholder="maximum" type="number" maxlength="10" value="">
                         
                     </span>
                 </span>
@@ -88,6 +88,7 @@
                             <th>Fuel</th>
                             <th>Gear</th>
                             <th>Price</th>
+                            <th>Kilometer</th>
                             <th>Model Year</th>
                             <th>Image</th>
                             <th>Detail</th>
@@ -148,6 +149,7 @@
                                         <td>${item.fuelName}</td>
                                         <td>${item.gearName}</td>
                                         <td>${item.price}</td>
+                                        <td>${item.kilometer}</td>
                                         <td>${item.modelYear}</td>
                                         <td>${item.carImage}</td>
                                         <td>
@@ -241,6 +243,8 @@
                 maxPrice: $("#priceMax").val(),
                 minYear: $("#yearMin").val(),
                 maxYear: $("#yearMax").val(),
+                minKm: $("#kilometerMin").val(),
+                maxKm: $("#kilometerMax").val()
             };
             $.ajax({
                 url: "@Url.Action("GetFilteredCarDetails","CarBuy")",
@@ -259,6 +263,7 @@
                                 <td>${item.fuelName}</td>
                                 <td>${item.gearName}</td>
                                 <td>${item.price}</td>
+                                <td>${item.kilometer}</td>
                                 <td>${item.modelYear}</td>
                                 <td>${item.carImage}</td>
                                 <td>
@@ -284,6 +289,8 @@
             $("#priceMax").val('');
             $("#yearMin").val('');
             $("#yearMax").val('');
+            $("#kilometerMin").val('');
+            $("#kilometerMax").val('');
 
             // Tablodaki verileri temizle
             var tbody = $("#list_data");

@@ -90,9 +90,9 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public List<CarDetailsDto> GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minYear, int? maxYear)
+        public List<CarDetailsDto> GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minKm, int? maxKm, int? minYear, int? maxYear)
         {
-            var cars = _carService.GetFilteredCarDetails(brandId,  colorId, fuelId, gearId, minPrice, maxPrice, minYear, maxYear).Data;
+            var cars = _carService.GetFilteredCarDetails(brandId, colorId, fuelId, gearId, minPrice, maxPrice, minKm, maxKm, minYear, maxYear).Data;
             return cars;
 
             //if (cars.Success)

@@ -5,9 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-
-
-
     public partial class CarFinderSalesSystemContext : DbContext
     {
         public CarFinderSalesSystemContext()
@@ -42,21 +39,17 @@ namespace DataAccess.Concrete.EntityFramework
         {
             modelBuilder.Entity<Brand>(entity =>
             {
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Car>(entity =>
             {
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
                 entity.Property(e => e.Description)
                     .HasMaxLength(50)
                     .IsUnicode(false);
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 6)");
-                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Brand).WithMany(p => p.Cars)
                     .HasForeignKey(d => d.BrandId)
@@ -120,9 +113,6 @@ namespace DataAccess.Concrete.EntityFramework
 
             modelBuilder.Entity<Notice>(entity =>
             {
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
-
                 entity.HasOne(d => d.Car).WithMany(p => p.Notices)
                     .HasForeignKey(d => d.CarId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -138,13 +128,11 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 entity.Property(e => e.Address).HasMaxLength(50);
                 entity.Property(e => e.CompanyName).HasMaxLength(50);
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
                 entity.Property(e => e.Email).HasMaxLength(50);
                 entity.Property(e => e.Name).HasMaxLength(50);
                 entity.Property(e => e.PasswordHash).HasMaxLength(50);
                 entity.Property(e => e.PasswordSalt).HasMaxLength(50);
                 entity.Property(e => e.Surname).HasMaxLength(50);
-                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
             OnModelCreatingPartial(modelBuilder);

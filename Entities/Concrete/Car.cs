@@ -19,29 +19,19 @@ namespace Entities.Concrete
 
         public int ModelYear { get; set; }
 
+        public int Kilometer { get; set; }
+
         public decimal Price { get; set; }
 
         public string Description { get; set; } = null!;
 
-        public DateTime? CreatedDate { get; set; }
+        public virtual Brand? Brand { get; set; } = null!;
 
-        public int? CreatedUserId { get; set; }
+        public virtual Color? Color { get; set; } = null!;
 
-        public DateTime? UpdatedDate { get; set; }
+        public virtual Fuel? Fuel { get; set; } = null!;
 
-        public int? UpdatedId { get; set; }
-
-        public bool? IsActive { get; set; }
-
-        public bool? IsDeleted { get; set; }
-
-        public virtual Brand Brand { get; set; } = null!;
-
-        public virtual Color Color { get; set; } = null!;
-
-        public virtual Fuel Fuel { get; set; } = null!;
-
-        public virtual Gear Gear { get; set; } = null!;
+        public virtual Gear? Gear { get; set; } = null!;
 
         public virtual ICollection<Image> Images { get; set; } = new List<Image>();
 

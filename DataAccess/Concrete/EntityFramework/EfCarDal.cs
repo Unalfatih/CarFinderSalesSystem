@@ -33,6 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = c.Name,
                                  FuelName = f.Name,
                                  GearName = g.Name,
+                                 Kilometer = p.Kilometer,
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,
@@ -66,6 +67,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = c.Name,
                                  FuelName = f.Name,
                                  GearName = g.Name,
+                                 Kilometer = p.Kilometer,
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,
@@ -93,6 +95,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  BrandId = b.Id,
                                  BrandName = b.Name,
                                  ColorName = c.Name,
+                                 Kilometer = p.Kilometer,
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,
@@ -103,7 +106,7 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public List<CarDetailsDto> GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minYear, int? maxYear)
+        public List<CarDetailsDto> GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice,int? minKm,int? maxKm, int? minYear, int? maxYear)
         {
             using (CarFinderSalesSystemContext context = new CarFinderSalesSystemContext())
             {
@@ -120,6 +123,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  (!gearId.HasValue || g.Id == gearId.Value) &&
                                  (!minPrice.HasValue || p.Price >= minPrice.Value) &&
                                  (!maxPrice.HasValue || p.Price <= maxPrice.Value) &&
+                                 (!minKm.HasValue || p.Kilometer >= minKm.Value) &&
+                                 (!maxKm.HasValue || p.Kilometer <= maxKm.Value) &&
                                  (!minYear.HasValue || p.ModelYear >= minYear.Value) &&
                                  (!maxYear.HasValue || p.ModelYear <= maxYear.Value)
 
@@ -134,6 +139,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName = c.Name,
                                  FuelName = f.Name,
                                  GearName = g.Name,
+                                 Kilometer = p.Kilometer,
                                  ModelYear = p.ModelYear,
                                  Price = p.Price,
                                  Description = p.Description,

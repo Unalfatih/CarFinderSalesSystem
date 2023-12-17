@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Entities.Concrete
 {
 
-    public partial class Gear : IEntity
+    public partial class Gear: IEntity
     {
         public int Id { get; set; }
 

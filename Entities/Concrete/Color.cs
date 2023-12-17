@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Entities.Concrete
 {
-
     public partial class Color : IEntity
     {
         public int Id { get; set; }

@@ -61,7 +61,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult AddCar(Car car)
+        public IActionResult Add(Car car)
         {
             var result = _carService.Add(car);
             if (result.Success)
@@ -72,9 +72,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getfilteredcar")]
-        public IActionResult GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minYear, int? maxYear)
+        public IActionResult GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minKm, int? maxKm, int? minYear, int? maxYear)
         {
-            var result = _carService.GetFilteredCarDetails(brandId,colorId, fuelId, gearId, minPrice, maxPrice, minYear, maxYear);
+            var result = _carService.GetFilteredCarDetails(brandId, colorId, fuelId, gearId, minPrice, maxPrice, minKm, maxKm, minYear, maxYear);
             if (result.Success)
             {
                 return Ok(result);

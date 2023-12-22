@@ -13,6 +13,7 @@ namespace DataAccess.Abstract
     {
         List<CarDetailsDto> GetCarDetails();
         List<CarDetailsDto> GetCarDetailsByBrandId(int brandId);
+        List<CarDetailsDto> GetCarDetailsById(int Id);
         List<CarDetailsDto> GetCarDetailsByPriceRange(decimal minPrice, decimal maxPrice);
 
         List<CarDetailsDto> GetFilteredCarDetails(int? brandId, int? colorId, int? fuelId, int? gearId, decimal? minPrice, decimal? maxPrice, int? minKm, int? maxKm, int? minYear, int? maxYear);

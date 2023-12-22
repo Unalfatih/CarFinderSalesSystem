@@ -147,8 +147,9 @@
                                         <td>${item.kilometer}</td>
                                         <td>${item.modelYear}</td>
                                         <td>${item.carImage}</td>
-                                        <td>
-                                            <button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button>
+                                        <td>                                           
+                                            <a href="CarDetail?Id=${item.id}" class="detailCar_Btn btn btn-primary" data-car-id="${item.id}">
+                                                <button>Details</button></a>                                            
                                         </td>
                                     </tr>`;
                         tbody.append(row);
@@ -159,6 +160,7 @@
                 }
             });
         }
+        //<button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button>
 
         function loadBrandOptions() {
             $.ajax({
@@ -262,7 +264,7 @@
                                 <td>${item.modelYear}</td>
                                 <td>${item.carImage}</td>
                                 <td>
-                                    <button class="detailCar_Btn btn btn-primary" data-product-id="${item.id}">Detail</button>
+                                    <button class="detailCar_Btn btn btn-primary" data-car-id="${item.id}">Detail</button>
                                 </td>
                             </tr>`;
                         tbody.append(row);
@@ -273,6 +275,8 @@
             
             });
         });
+        //<a href="CarDetail?Id=${item.id}" class="detailCar_Btn btn btn-primary" data-car-id="${item.id}">Detail</a>
+        
 
         function clearFiltersAndReloadList() {
             // Filtre değerlerini temizle

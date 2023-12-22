@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using IResult = Core.Utilities.Results.IResult;
 
 namespace WebUI.Controllers
 {
@@ -11,13 +12,15 @@ namespace WebUI.Controllers
         private readonly IColorService _colorService;
         private readonly IFuelService _fuelService;
         private readonly IGearService _gearService;
+        private readonly ICarService _carService;
 
-        public CarSellController(IBrandService brandService, IColorService colorService, IFuelService fuelService, IGearService gearService)
+        public CarSellController(IBrandService brandService, IColorService colorService, IFuelService fuelService, IGearService gearService, ICarService carService)
         {
             _brandService = brandService;
             _colorService = colorService;
             _fuelService = fuelService;
             _gearService = gearService;
+            _carService = carService;
         }
 
         public IActionResult Index()
@@ -72,6 +75,17 @@ namespace WebUI.Controllers
                 return new SuccessDataResult<List<Gear>>(gears.Data);
             }
             return new ErrorDataResult<List<Gear>>("Gear Data Error!");
+        }
+
+        [HttpPost]
+        public IResult AddCar(Car car)
+        {
+            var result = _carService.Add(car);
+            if (result.Success)
+            {
+                return new SuccessResult("Car Added");
+            }
+            return new ErrorResult("Car Not Added");
         }
     }
 }

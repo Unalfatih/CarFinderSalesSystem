@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="css/car_sell.css">
     <link rel="icon" type="image/car-icaon" href="img/favicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     @using Entities.Concrete
@@ -44,14 +45,14 @@
                     <div class="form-group">
                         <b>Model Year</b>
                         <label for="unitYear"></label>
-                        <input type="number" class="form-control" id="unitYear" name="UnityEAR" placeholder="Input your model year" required />
+                        <input type="number" class="form-control" id="unitYear" name="UnitYear" placeholder="Input your model year" required />
                     </div>
                     <hr style="border-top: 1px solid #908f8f" />
 
                     <div class="form-group">
                         <b>Km</b>
                         <label for="unitKm"></label>
-                        <input type="number" class="form-control" id="unitKm" name="UnityEAR" placeholder="Input your km" required />
+                        <input type="number" class="form-control" id="unitKm" name="Kilometer" placeholder="Input your km" required />
                     </div>
                     <hr style="border-top: 1px solid #908f8f" />
 
@@ -89,6 +90,7 @@
                 <button class="btn-upload overlay-button" id="clearButton">Clear</button>
             </section>
         </div>
+        
 
 
     </div>
@@ -337,7 +339,126 @@
                 }
             });
         }
+
+        //$("#saveButton").click(function(){
+        //    var car = {
+        //        brandId: $("input[name='brand']:checked").val(),
+        //        colorId: $("input[name='color']:checked").val(),
+        //        fuelId: $("input[name='fuel']:checked").val(),
+        //        gearId: $("input[name='gear']:checked").val(),
+        //        modelYear: $("#unitYear").val(),
+        //        kilometer: $("#unitKm").val(),
+        //        price: $("#unitPrice").val(),
+        //        description: $("#carinfo").val()
+
+        //    };
+        //    console.log(car);
+        //    $.ajax({
+        //        url: "@Url.Action("AddCar","CarSell")",
+        //        method: "POST",
+        //        dataType: "json",
+        //        data: car,
+        //        success: function(response) {
+                    
+        //        },
+        //        error: function (error) {
+                    
+        //            console.error("Error occurred: ", error);
+        //        }
+        //    });
+        //});
+
+        $("#saveButton").click(function (event) {
+            
+            var brandSelected = $("input[name='brand']:checked").val();
+            var colorSelected = $("input[name='color']:checked").val();
+            var fuelSelected = $("input[name='fuel']:checked").val();
+            var gearSelected = $("input[name='gear']:checked").val();
+
+            if (!brandSelected) {
+                alert("Brand option cannot remain empty!");
+                return false;
+            }
+
+            if (!colorSelected) {
+                alert("Color option cannot remain empty!");
+                return false;
+            }
+
+            if (!fuelSelected) {
+                alert("Fuel option cannot remain empty!");
+                return false;
+            }
+
+            if (!gearSelected) {
+                alert("Gear option cannot remain empty!");
+                return false;
+            }
+
+            // Model Year, Kilometer ve Price alanlarını kontrol et
+            var modelYear = $("#unitYear").val();
+            if (!modelYear) {
+                alert("Model Year cannot remain empty!");
+                return false;
+            }
+
+            var kilometer = $("#unitKm").val();
+            if (!kilometer) {
+                alert("Kilometer cannot remain empty!");
+                return false;
+            }
+
+            var price = $("#unitPrice").val();
+            if (!price) {
+                alert("Price cannot remain empty!");
+                return false;
+            }
+
+            
+            var car = {
+                brandId: brandSelected,
+                colorId: colorSelected,
+                fuelId: fuelSelected,
+                gearId: gearSelected,
+                modelYear: modelYear,
+                kilometer: kilometer,
+                price: price,
+                description: $("#carinfo").val()
+            };
+
+            console.log(car);
+
+            $.ajax({
+                url: "@Url.Action("AddCar","CarSell")",
+                method: "POST",
+                dataType: "json",
+                data: car,
+                success: function (response) {
+                    alert("Car added for sale")
+                },
+                error: function (error) {
+                    console.error("Error occurred: ", error);
+                }
+            });
+        });
         
+        $("#clearButton").click(function () {
+            
+            $("input[type='radio']:checked").prop("checked", false);
+
+            
+            $("#unitYear").val("");  
+            $("#unitKm").val("");   
+            $("#unitPrice").val(""); 
+            $("#carinfo").val("");  
+
+
+            $("#imagePreview").empty();
+
+
+            $("#imageUpload").val("");
+           
+        });
 
 
 

@@ -101,5 +101,12 @@ namespace WebUI.Controllers
             //}
             //return new ErrorDataResult<List<CarDetailsDto>>("Car Filtered Error!");
         }
+
+        [HttpPost]
+        public List<CarDetailsDto> CarDetailById(int Id)
+        {
+            var cars = _carService.GetCarDetailsById(Id).Data;
+            return cars;
+        }
     }
 }

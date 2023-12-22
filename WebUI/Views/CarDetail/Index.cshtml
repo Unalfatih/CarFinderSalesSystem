@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="css/car_detail.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 
@@ -73,13 +74,13 @@
             <section class="brand-row" style="display:flex; flex-direction: row; grid-gap: 1rem; width:60% ">
                 <section class="left" style="display:flex; flex-direction: column; grid-gap: 6rem; width:50%">
 
-                    <strong>Marka</strong>
+                    <strong>Brand</strong>
 
                 </section>
 
                 <section class="right" style="display:flex; flex-direction: column; grid-gap: 6rem; width:50%">
 
-                    <a>BMW</a>
+                    
 
                 </section>
             </section>
@@ -87,13 +88,13 @@
             <section class="price-row" style="display:flex; flex-direction: row; grid-gap: 1rem; width:60% ">
                 <section class="left" style="display:flex; flex-direction: column; grid-gap: 1rem; width:50%">
 
-                    <strong>FİYAT</strong>
+                    <strong>Price</strong>
 
                 </section>
 
                 <section class="right" style="display:flex; flex-direction: column; grid-gap: 1rem; width:50%">
 
-                    <a>100.000</a>
+                    
 
                 </section>
             </section>
@@ -107,7 +108,7 @@
 
                 <section class="right" style="display:flex; flex-direction: column; grid-gap: 1rem; width:50%">
 
-                    <a>5.000</a>
+                    
 
                 </section>
             </section>
@@ -115,13 +116,13 @@
             <section class="color-row" style="display:flex; flex-direction: row; grid-gap: 1rem; width:60% ">
                 <section class="left" style="display:flex; flex-direction: column; grid-gap: 1rem; width:50%">
 
-                    <strong>RENK</strong>
+                    <strong>Color</strong>
 
                 </section>
 
                 <section class="right" style="display:flex; flex-direction: column; grid-gap: 1rem; width:50%">
 
-                    <a>Kırmızı, Yeşil</a>
+                    
 
                 </section>
             </section>
@@ -129,13 +130,13 @@
             <section class="year-row" style="display:flex; flex-direction: row; grid-gap: 1rem; width:60% ">
                 <section class="left" style="display:flex; flex-direction: column; grid-gap: 1rem; width:50%">
 
-                    <strong>ARAÇ YAŞI</strong>
+                    <strong>Year</strong>
 
                 </section>
 
                 <section class="right" style="display:flex; flex-direction: column; grid-gap: 1rem; width:50%">
 
-                    <a>2001</a>
+                    
 
                 </section>
             </section>
@@ -143,14 +144,7 @@
             <section class="car-of-info" style="display:flex; flex-direction: row; grid-gap: 1rem; width:100% ">
 
                 <div class="info-text">
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-                    in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-                    are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden
-                    in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks
-                    as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin
-                    words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks
-                    reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour,
-                    or non-characteristic words etc.
+                    
                 </div>
 
             </section>
@@ -158,6 +152,12 @@
     </section>
 
     <script>
+        $(document).ready(function () {
+
+            loadCarDetail();
+
+        });
+
 
         function openModal() {
             document.getElementById("myModal").style.display = "block";
@@ -194,6 +194,32 @@
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
             captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+
+        function loadCarDetail(){
+            const urlParams = new URLSearchParams(window.location.search);
+
+            $.ajax({
+                url: "@Url.Action("CarDetailById","CarDetail")",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    Id: urlParams.get('Id'),
+                },
+                success: function(response){
+                    $.each(response,function(index, item){
+                        console.log(item)
+                        
+
+                        $('.brand-row .right').html('<a>' + item.brandName + '</a>');
+                        $('.price-row .right').html('<a>' + item.price + '</a>');
+                        $('.km-row .right').html('<a>' + item.kilometer + '</a>');
+                        $('.color-row .right').html('<a>' + item.colorName + '</a>');
+                        $('.year-row .right').html('<a>' + item.modelYear + '</a>');
+                        $('.car-of-info .info-text').html('<a>' + item.description + '</a>');
+                    });
+                }
+            });
         }
 
     </script>
